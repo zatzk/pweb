@@ -1,58 +1,67 @@
 import { useState, useEffect } from 'react';
 import { FiUser, FiDelete,FiEdit2 } from 'react-icons/fi';
-import firebase from '../../services/firebaseConnection';
 import { toast } from 'react-toastify';
 import Header from '../../components/Header';
 import Title from '../../components/Title';
 import './costumers.css'
 import axios from 'axios'
 
+
 export default function Costumers() {
 
-    const API_URL = `http://localhost/8080/clients/`
+    const API_URL = `http://localhost/8081/clients/`;
+
     const [name, setName] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [address, setAddress] = useState('');
     const [APIData, setAPIData] = useState([]);
+
+
     useEffect(() => {
-        axios.get(API_URL)
-            .then((response) => {
-                console.log(response.data)
-                setAPIData(response.data);
-            })
-    }, []);
+      axios.get(API_URL)
+          .then((response) => {
+              console.log(response.data);
+              setAPIData(response.data);
+          })
+  
+  });
+ 
 
-  //   const setData = (data) => {
-  //     let { id, firstName, lastName, checkbox } = data;
-  //     localStorage.setItem('ID', id);
-  //     localStorage.setItem('First Name', firstName);
-  //     localStorage.setItem('Last Name', lastName);
-  //     localStorage.setItem('Checkbox Value', checkbox)
-  // }
-
-    const getData = () => {
-      axios.get(`${API_URL}`)
+    const getData = async (e) => {
+      e.preventDefault()
+      axios.get(API_URL)
           .then((getData) => {
               setAPIData(getData.data);
           })
     }
 
     const onDelete = (id) => {
-        axios.delete(`${API_URL}+${id}`)
+        axios.delete(API_URL+`${id}`)
         .then(() => {
             getData();
         })
     }
 
-    const postData = () => {
+
+    const postData = async (e) => {
+      e.preventDefault()
       axios.post(API_URL, {
           name,
           cnpj,
           address
+      }).then(() => {
+        toast.success("dados inseridos!")
       })
-  }
+    }
 
-
+  //   const setData = (data) => {
+  //     let { id, name, cnpj, address } = data;
+  //     localStorage.setItem('ID', id);
+  //     localStorage.setItem('Name', name);
+  //     localStorage.setItem('Cnpj', cnpj);
+  //     localStorage.setItem('Address Value', address)
+  // }
+   
 
     return (
         <div>

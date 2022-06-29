@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { createContext } from 'react';
-import { auth } from '../services/firebaseConnection';
+import { auth } from '../services/firebase';
 
 const authContext = createContext();
 
@@ -20,10 +20,10 @@ const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const signUp = (email, password) => {
+  const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  const signIn = (email, password) => {
+  const signin = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
   const logout = () => {
@@ -40,8 +40,8 @@ const AuthContext = ({ children }) => {
 
   const value = {
     user,
-    signUp,
-    signIn,
+    signup,
+    signin,
     logout,
     loading,
     setLoading,

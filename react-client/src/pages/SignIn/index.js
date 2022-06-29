@@ -10,13 +10,13 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signin } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('')
     try {
-      await signIn(email, password)
+      await signin(email, password)
       navigate('/Dashboard')
       toast.success("bem vindo!");
     } catch (error) {

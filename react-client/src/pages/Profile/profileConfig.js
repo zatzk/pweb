@@ -1,6 +1,6 @@
 import {collection,  doc,  getDocs,  query,  updateDoc,  where} from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes, deleteObject } from 'firebase/storage';
-import { db, storage } from '../../services/firebaseConnection';
+import { db, storage } from '../../services/firebase';
 
 const deleteFile = (filePath) => {
   const imageRef = ref(storage, filePath);

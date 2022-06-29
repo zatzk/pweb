@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Title from '../../components/Title';
 import { FiPlusCircle } from 'react-icons/fi';
-import { toast } from 'react-toastify';
 import './new.css';
-import firebase from '../../services/firebaseConnection';
 
 export default function New() {
 
